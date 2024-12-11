@@ -1,0 +1,16 @@
+[Unit]
+Description=novncd
+StartLimitIntervalSec=100
+StartLimitBurst=5
+
+[Service]
+Type=simple
+WorkingDirectory=/home/%i/catkin_ws/src/setting/novncd/systemd
+ExecStart=/home/%i/catkin_ws/src/setting/novncd/systemd/novncd.sh
+User=%i
+Group=%i
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

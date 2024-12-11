@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd /home/{{ user_name }}/catkin_ws/src/setting/novncd
+if pgrep -u {{ user_name }} -x "Xtigervnc" > /dev/null; then
+    echo "vncserver kill"
+    vncserver -kill :{{ display }}
+fi
+
+vncserver :{{ display }}
+if [ $? -eq 0 ]; then
+    echo "vncserver success"
+    ./utils/novnc_proxy --vnc localhost:590{{ display }} --listen 0.0.0.0:{{ ip_port }}
+else
+    echo "!! VNCSERVER FAILED !!"
+fi
