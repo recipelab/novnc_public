@@ -14,8 +14,7 @@ jinja2:
 	../jinja2-cli/jinja2 systemd/xstartup.tmpl -D session=${SESSION} -o systemd/xstartup
 	chmod 775 systemd/xstartup
 	mkdir -p /home/${USER_NAME}/.vnc
-	mv /home/${USER_NAME}/.vnc/xstartup /home/${USER_NAME}/.vnc/xstartup.bak
-	ln -s /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup /home/${USER_NAME}/.vnc
+	ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup /home/${USER_NAME}/.vnc
 
 install_vnc:
 	sudo apt install xfce4 xfce4-goodies
