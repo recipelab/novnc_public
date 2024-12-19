@@ -16,10 +16,15 @@ jinja2:
 	mkdir -p /home/${USER_NAME}/.vnc
 	ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup /home/${USER_NAME}/.vnc
 
+install_jinja2:
+	sudo apt install python3-jinja2
+
 install_vnc:
 	sudo apt install xfce4 xfce4-goodies
 	sudo apt install tigervnc-standalone-server
 	vncpasswd
+
+install: install_jinja2 install_vnc
 
 list_vnc:
 	vncserver -list
