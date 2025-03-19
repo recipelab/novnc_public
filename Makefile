@@ -1,4 +1,5 @@
 USER_NAME=recipelab
+VNC_PASSWORD=1q2w3e
 DISPLAY=0
 SESSION=/usr/bin/startxfce4
 IP_PORT=300${DISPLAY}
@@ -17,12 +18,14 @@ jinja2:
 	ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup.sh /home/${USER_NAME}/.vnc/xstartup
 
 install_jinja2:
-	sudo apt install python3-jinja2
+	sudo apt update
+	sudo apt install -y python3-jinja2
 
 install_vnc:
-	sudo apt install xfce4 xfce4-goodies
-	sudo apt install tigervnc-standalone-server
-	vncpasswd
+	sudo apt update
+	sudo apt install -y xfce4 xfce4-goodies
+	sudo apt install -y tigervnc-standalone-server
+	/bin/bash -c "vncpasswd -f <<< \"${VNC_PASSWORD}\" > /home/${USER_NAME}/.vnc/passwd"
 
 install: install_jinja2 install_vnc
 
