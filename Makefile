@@ -1,5 +1,4 @@
 USER_NAME=recipelab
-VNC_PASSWORD=1q2w3e
 DISPLAY=0
 SESSION=/usr/bin/startxfce4
 IP_PORT=300${DISPLAY}
@@ -27,7 +26,8 @@ install_vnc:
 	sudo apt install -y xfce4 xfce4-goodies
 	sudo apt install -y tigervnc-standalone-server
 	mkdir -p ${VNC_DIR}
-	/bin/bash -c "vncpasswd -f <<< \"${VNC_PASSWORD}\" > ${VNC_DIR}/passwd"
+	vncpasswd
+	# /bin/bash -c "vncpasswd -f <<< \"[if short password]\" > ${VNC_DIR}/passwd"
 
 install: install_jinja2 install_vnc
 
