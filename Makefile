@@ -3,6 +3,7 @@ VNC_PASSWORD=1q2w3e
 DISPLAY=0
 SESSION=/usr/bin/startxfce4
 IP_PORT=300${DISPLAY}
+VNC_DIR=/home/${USER_NAME}/.vnc
 
 run:
 	@echo USER_NAME=${USER_NAME}
@@ -14,8 +15,8 @@ jinja2:
 	chmod 775 systemd/novncd.sh
 	../jinja2-cli/jinja2 systemd/xstartup.tmpl -D session=${SESSION} -o systemd/xstartup.sh
 	chmod 775 systemd/xstartup.sh
-	mkdir -p /home/${USER_NAME}/.vnc
-	ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup.sh /home/${USER_NAME}/.vnc/xstartup
+	mkdir -p ${VNC_DIR}
+	ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup.sh ${VNC_DIR}/xstartup
 
 install_jinja2:
 	sudo apt update
@@ -25,7 +26,8 @@ install_vnc:
 	sudo apt update
 	sudo apt install -y xfce4 xfce4-goodies
 	sudo apt install -y tigervnc-standalone-server
-	/bin/bash -c "vncpasswd -f <<< \"${VNC_PASSWORD}\" > /home/${USER_NAME}/.vnc/passwd"
+	mkdir -p ${VNC_DIR}
+	/bin/bash -c "vncpasswd -f <<< \"${VNC_PASSWORD}\" > ${VNC_DIR}/passwd"
 
 install: install_jinja2 install_vnc
 
