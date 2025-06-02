@@ -8,7 +8,7 @@ fi
 vncserver :5{{ display }}
 if [ $? -eq 0 ]; then
     echo "vncserver success"
-    /home/{{ user_name }}/catkin_ws/src/setting/novncd/utils/novnc_proxy --vnc localhost:595{{ display }} --listen 0.0.0.0:{{ ip_port }}
+    /home/{{ user_name }}/catkin_ws/src/setting_public/novncd/utils/novnc_proxy --vnc localhost:595{{ display }} --listen 0.0.0.0:{{ ip_port }}
 else
     echo "!! VNCSERVER FAILED !!"
 fi
