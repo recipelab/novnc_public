@@ -6,7 +6,7 @@ VNC_DIR=/home/${USER_NAME}/.vnc
 
 run:
 	@echo USER_NAME=${USER_NAME}
-	/home/${USER_NAME}/catkin_ws/src/setting_public/novncd/systemd/novncd.sh
+	/home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/novncd.sh
 
 jinja2:
 	../jinja2-cli/jinja2 systemd/novncd.service.tmpl -D daemon=novncd -o systemd/novncd@${USER_NAME}.service
@@ -15,7 +15,7 @@ jinja2:
 	../jinja2-cli/jinja2 systemd/xstartup.tmpl -D session=${SESSION} -o systemd/xstartup.sh
 	chmod 775 systemd/xstartup.sh
 	mkdir -p ${VNC_DIR}
-	ln -sf /home/${USER_NAME}/catkin_ws/src/setting_public/novncd/systemd/xstartup.sh ${VNC_DIR}/xstartup
+	ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/xstartup.sh ${VNC_DIR}/xstartup
 
 install_jinja2:
 	sudo apt update
@@ -35,7 +35,7 @@ list_vnc:
 	vncserver -list
 
 enable_service:
-	sudo ln -sf /home/${USER_NAME}/catkin_ws/src/setting_public/novncd/systemd/novncd@${USER_NAME}.service /etc/systemd/system
+	sudo ln -sf /home/${USER_NAME}/catkin_ws/src/setting/novncd/systemd/novncd@${USER_NAME}.service /etc/systemd/system
 	sudo systemctl enable --now novncd@${USER_NAME}
 	# sudo systemctl [enable|start|restart|stop|status|disable] novncd@${USER_NAME}
 
